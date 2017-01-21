@@ -1,3 +1,5 @@
+package com.algorithm.hacker;
+
 import java.util.Scanner;
 
 /**

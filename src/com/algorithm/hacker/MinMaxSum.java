@@ -1,3 +1,5 @@
+package com.algorithm.hacker;
+
 import java.util.Scanner;
 import java.util.SortedSet;
 import java.util.TreeSet;

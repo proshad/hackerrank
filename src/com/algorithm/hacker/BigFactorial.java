@@ -1,3 +1,5 @@
+package com.algorithm.hacker;
+
 import java.math.BigInteger;
 import java.util.Scanner;
 import java.math.*;
