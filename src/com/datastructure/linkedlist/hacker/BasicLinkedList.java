@@ -218,6 +218,21 @@ public class BasicLinkedList {
 
     }
 
+    //Cycle Detection;  Floyd’s Cycle detection algorithm terminates when fast and slow pointers meet at a common point
+    boolean hasCycle(Node head) {
+        Node slow = head, fast = head;
+        while (slow != null && fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            // If slow and fast meet at same point then loop is present
+            if (slow == fast) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
 
 class Node {
