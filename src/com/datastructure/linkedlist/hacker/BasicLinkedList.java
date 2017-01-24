@@ -4,8 +4,14 @@ package com.datastructure.linkedlist.hacker;
  * Created by proshad on 1/24/17.
  */
 public class BasicLinkedList {
-    // Print the Elements of a Linked List
 
+
+    class Node {
+        int data;
+        Node next;
+    }
+
+    // Print the Elements of a Linked List
     void Print(Node head) {
         if (head != null) {
             System.out.println(head.data);
@@ -185,7 +191,7 @@ public class BasicLinkedList {
             head = head.next;
         }
         String[] array = sb.toString().split(" ");
-        result = Integer.parseInt(array[array.length - n-1]);
+        result = Integer.parseInt(array[array.length - n - 1]);
         return result;
     }
 
@@ -209,8 +215,7 @@ public class BasicLinkedList {
                 next_next = current.next.next;
                 current.next = null;
                 current.next = next_next;
-            }
-            else // advance if no deletion
+            } else // advance if no deletion
                 current = current.next;
         }
 
@@ -233,9 +238,50 @@ public class BasicLinkedList {
         return false;
     }
 
+    //Find Merge Point of Two Lists
+    int FindMergeNode(Node headA, Node headB) {
+        int lengthA = 0;
+        int lengthB = 0;
+        Node head1 = headA;
+        Node head2 = headB;
+        Node current1, current2;
+        while (headA != null) {
+            lengthA++;
+            headA = headA.next;
+        }
+        while (headB != null) {
+            lengthB++;
+            headB = headB.next;
+        }
+        int d,i;
+        if (lengthA > lengthB) {
+            d = lengthA - lengthB;
+            current1 = head1;
+            current2 = head2;
+        } else {
+            d = lengthB - lengthA;
+            current1 = head2;
+            current2 = head1;
+        }
+
+        for (i = 0; i < d; i++) {
+            if (current1 == null) {
+                return -1;
+            }
+            current1 = current1.next;
+        }
+        while (current1 != null && current2 != null) {
+            if (current1.data == current2.data) {
+                return current1.data;
+            }
+            current1 = current1.next;
+            current2 = current2.next;
+        }
+
+        return -1;
+    }
+
+
 }
 
-class Node {
-    int data;
-    Node next;
-}
+
