@@ -143,16 +143,79 @@ public class BasicLinkedList {
 //        return 1;
 
 
-
-
-        while (headA!=null && headB!=null && (headA.data == headB.data)) {
+        while (headA != null && headB != null && (headA.data == headB.data)) {
             headA = headA.next;
-            headB =headB.next;
+            headB = headB.next;
         }
         boolean flag = headA == headB;
         if (!flag)
             return 0;
         return 1;
+    }
+
+
+    //Merge two sorted linked lists
+    Node MergeLists(Node headA, Node headB) {
+        Node result = new Node();
+        /* Base cases */
+        if (headA == null)
+            return headB;
+        else if (headB == null)
+            return headA;
+
+        /* Pick either a or b, and recur */
+        if (headA.data <= headB.data) {
+            result = headA;
+            result.next = MergeLists(headA.next, headB);
+        } else {
+            result = headB;
+            result.next = MergeLists(headA, headB.next);
+        }
+        return result;
+
+    }
+
+
+    //Get Node Value
+    int GetNode(Node head, int n) {
+        int result = 0;
+        StringBuilder sb = new StringBuilder();
+        while (head != null) {
+            sb.append(head.data + " ");
+            head = head.next;
+        }
+        String[] array = sb.toString().split(" ");
+        result = Integer.parseInt(array[array.length - n-1]);
+        return result;
+    }
+
+    //Delete duplicate-value nodes from a sorted linked list
+    Node RemoveDuplicates(Node head) {
+       /*Another reference to head*/
+        Node current = head;
+
+        /* Pointer to store the next pointer of a node to be deleted*/
+        Node next_next;
+
+        /* do nothing if the list is empty */
+        if (head == null)
+            return head;
+
+        /* Traverse list till the last node */
+        while (current.next != null) {
+
+            /*Compare current node with the next node */
+            if (current.data == current.next.data) {
+                next_next = current.next.next;
+                current.next = null;
+                current.next = next_next;
+            }
+            else // advance if no deletion
+                current = current.next;
+        }
+
+        return head;
+
     }
 
 }
