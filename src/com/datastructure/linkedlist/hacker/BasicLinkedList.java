@@ -4,7 +4,7 @@ package com.datastructure.linkedlist.hacker;
  * Created by proshad on 1/24/17.
  */
 public class BasicLinkedList {
-   // Print the Elements of a Linked List
+    // Print the Elements of a Linked List
 
     void Print(Node head) {
         if (head != null) {
@@ -13,7 +13,7 @@ public class BasicLinkedList {
         }
     }
 
-//Insert a Node at the Tail of a Linked List
+    //Insert a Node at the Tail of a Linked List
     Node Insert(Node head, int data) {
         Node temp = new Node();
         temp.data = data;
@@ -44,7 +44,7 @@ public class BasicLinkedList {
     }
 
 
-//Insert a node at a specific position in a linked list
+    //Insert a node at a specific position in a linked list
     Node InsertNth(Node head, int data, int position) {
         // This is a "method-only" submission.
         // You only need to complete this method.
@@ -71,10 +71,10 @@ public class BasicLinkedList {
         return existing;
     }
 
-//Delete a Node
+    //Delete a Node
     Node Delete(Node head, int position) {
         // Complete this method
-        if (position == 0){
+        if (position == 0) {
             return head.next;
         }
         Node currentNode = head;
@@ -90,6 +90,69 @@ public class BasicLinkedList {
         prevNode.next = currentNode.next;
         return head;
 
+    }
+
+    // Print in Reverse
+    void ReversePrint(Node head) {
+
+        Node prev = null;
+        Node current = head;
+        Node next;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
+        while (head != null) {
+            System.out.println(head.data);
+            head = head.next;
+        }
+    }
+
+    //Compare two linked lists
+    int CompareLists(Node headA, Node headB) {
+//        int lengthA = 0;
+//        int lengthB = 0;
+//        Node tempA = headA;
+//        Node tempB = headB;
+//        while (tempA != null) {
+//            lengthA++;
+//            tempA = tempA.next;
+//        }
+//        while (tempB != null) {
+//            lengthB++;
+//            tempB = tempB.next;
+//        }
+//        if (lengthA != lengthB)
+//            return 0;
+//        boolean flag = true;
+//        while (headA != null) {
+//            int data1 = headA.data;
+//            int data2 = headB.data;
+//            if (data1 != data2) {
+//                flag = false;
+//                break;
+//            }
+//            headA = headA.next;
+//            headB = headB.next;
+//        }
+//        if(!flag)
+//            return 0;
+//        return 1;
+
+
+
+
+        while (headA!=null && headB!=null && (headA.data == headB.data)) {
+            headA = headA.next;
+            headB =headB.next;
+        }
+        boolean flag = headA == headB;
+        if (!flag)
+            return 0;
+        return 1;
     }
 
 }
