@@ -1,5 +1,7 @@
 package com.datastructure.tree.hacker;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -7,13 +9,11 @@ import java.util.Stack;
  */
 public class BasicTree {
 
-    //Tree: Preorder Traversal
-    /* Algorithm
-    Until all nodes are traversed −
+    /*Tree: Preorder Traversal
 Step 1 − Visit root node.
 Step 2 − Recursively traverse left subtree.
 Step 3 − Recursively traverse right subtree.
-    * */
+     */
     void preOrder(Node root) {
 
 //        if(root !=  null) {
@@ -135,6 +135,62 @@ Step 3 − Visit root node
             }
         }
 
+
+    }
+
+
+    // get height of a tree. level of tree
+    static int height(Node root) {
+        if (root == null) {
+            return -1;
+        } else if (root.left == null) {
+            return 1 + height(root.right);
+        } else if (root.right == null) {
+            return 1 + height(root.left);
+        } else {
+            return 1 + Math.max(height(root.left), height(root.right));
+        }
+
+    }
+
+    // print the top view
+    void top_view(Node root) {
+        if (root == null)
+            return;
+        Stack<Node> s = new Stack<Node>();
+        Node currentNode = root;
+        while (!s.empty() || currentNode != null) {
+            if (currentNode != null) {
+                s.push(currentNode);
+                currentNode = currentNode.left;
+            } else {
+                Node n = s.pop();
+                System.out.print(n.data + " ");
+
+            }
+        }
+        currentNode = root.right;
+        while (currentNode != null) {
+            System.out.print(currentNode.data + " ");
+            currentNode = currentNode.right;
+
+        }
+
+    }
+
+    //Level order traversal
+    void LevelOrder(Node root) {
+        Queue<Node> queue=new LinkedList<Node>();
+        queue.add(root);
+        while(!queue.isEmpty())
+        {
+            Node tempNode=queue.poll();
+            System.out.print(tempNode.data +" ");
+            if(tempNode.left!=null)
+                queue.add(tempNode.left);
+            if(tempNode.right!=null)
+                queue.add(tempNode.right);
+        }
 
     }
 
