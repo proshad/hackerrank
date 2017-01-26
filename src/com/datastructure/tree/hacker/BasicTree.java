@@ -3,6 +3,7 @@ package com.datastructure.tree.hacker;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.Vector;
 
 /**
  * Created by proshad on 1/24/17.
@@ -180,24 +181,107 @@ Step 3 − Visit root node
 
     //Level order traversal
     void LevelOrder(Node root) {
-        Queue<Node> queue=new LinkedList<Node>();
+        Queue<Node> queue = new LinkedList<Node>();
         queue.add(root);
-        while(!queue.isEmpty())
-        {
-            Node tempNode=queue.poll();
-            System.out.print(tempNode.data +" ");
-            if(tempNode.left!=null)
+        while (!queue.isEmpty()) {
+            Node tempNode = queue.poll();
+            System.out.print(tempNode.data + " ");
+            if (tempNode.left != null)
                 queue.add(tempNode.left);
-            if(tempNode.right!=null)
+            if (tempNode.right != null)
                 queue.add(tempNode.right);
         }
 
     }
 
+    // Binary Search Tree : Insertion
+    static Node Insert(Node root, int value) {
+        Node tempNode = new Node();
+        tempNode.data = value;
+        tempNode.left = null;
+        tempNode.right = null;
 
-    class Node {
-        int data;
-        Node left;
-        Node right;
+        Node current;
+        Node parent;
+
+        //if tree is empty
+        if (root == null) {
+            root = tempNode;
+        } else {
+            current = root;
+            parent = null;
+
+            while (true) {
+                parent = current;
+
+                //go to left of the tree
+                if (value <= parent.data) {
+                    current = current.left;
+                    //insert to the left
+                    if (current == null) {
+                        parent.left = tempNode;
+                        break;
+                    }
+                }//go to right of the tree
+                else {
+                    current = current.right;
+                    //insert to the right
+                    if (current == null) {
+                        parent.right = tempNode;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return root;
+    }
+
+    // Lowest Common Ancestor
+    static Node lca(Node root, int v1, int v2) {
+        // to store paths to n1 and n2 from the root
+        Vector<Node> path1 = new Vector<Node>();
+        Vector<Node> path2 = new Vector<Node>();
+
+        // Find paths from root to v1 and root to v2. If either v1 or v2 is not present, return -1
+        if (!findPath(root, path1, v1) || !findPath(root, path2, v2))
+            return null;
+    /* Compare the paths to get the first different value */
+        int i;
+        for (i = 0; i < path1.size() && i < path2.size(); i++){
+            Node node1 = path1.get(i);
+            Node node2 = path2.get(i);
+            if(node1.data != node2.data)
+                break;
+        }
+
+        return path1.get(i - 1);
+
+    }
+
+    // Finds the path from root node to given root of the tree, Stores the
+// path in a vector path[], returns true if path exists otherwise false
+    public static boolean findPath(Node root, Vector<Node> path, int k) {
+        // base case
+        if (root == null)
+            return false;
+
+        // Store this node in path vector. The node will be removed if
+        // not in path from root to k
+        path.add(root);
+
+        // See if the k is same as root's key
+        if (root.data == k)
+            return true;
+
+        // Check if k is found in left or right sub-tree
+        if ((root.left != null && findPath(root.left, path, k)) || (root.right != null && findPath(root.right, path, k)))
+            return true;
+
+        // If not present in subtree rooted with root, remove root from
+        // path[] and return false
+        path.remove(path.size()-1);
+        return false;
     }
 }
+
