@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Created by proshad on 1/26/17.
  */
 public class SwapNodes2 {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Scanner s = new Scanner(System.in);
         final int N = s.nextInt();
         int[][] leafs = new int[N][2];
@@ -23,20 +23,19 @@ public class SwapNodes2 {
             depths[i] = s.nextInt();
         }
 
-        TreeNode left = null;
-        TreeNode right = null;
-        if (leafs[0][0] > -1) {
-            left = new TreeNode(leafs[0][0]);
-            left.mapChildNodes(left, leafs, 1 , 0, N);
-        }
-        if (leafs[0][1] > -1) {
-            right = new TreeNode(leafs[0][1]);
-            right.mapChildNodes(right, leafs, 2 , 0, N);
-        }
-        TreeNode mainTree = new TreeNode(1, left, right);
-        for (int d : depths) {
+        TreeNode leftTree = (leafs[0][0] > -1) ? new TreeNode(leafs[0][0]) : null;
+        TreeNode rightTree = (leafs[0][1] > -1) ? new TreeNode(leafs[0][1]) : null;
+
+        if (leafs[0][0] > -1)
+            leftTree.mapChildNodes(leftTree, leafs, (leafs[0][0] > -1) ? 1 : 2, 0, N);
+        if (leafs[0][1] > -1)
+            rightTree.mapChildNodes(rightTree, leafs, (leafs[0][0] > -1) ? 2 : 1, 0, N);
+
+        TreeNode mainTree = new TreeNode(1, leftTree, rightTree);
+
+        for(int d : depths) {
             mainTree.swap(mainTree, d, 1);
-            mainTree.inOrder(mainTree);
+            mainTree.inorder(mainTree);
             System.out.println();
         }
     }

@@ -10,8 +10,6 @@ public class TreeNode {
 
     TreeNode(int data) {
         this.data = data;
-        this.left = null;
-        this.right = null;
     }
 
     TreeNode(int data, TreeNode left, TreeNode right) {
@@ -36,12 +34,12 @@ public class TreeNode {
         }
     }
 
-    public void inOrder(TreeNode node) {
+    public void inorder(TreeNode node) {
         if (node == null)
             return;
-        inOrder(node.left);
+        inorder(node.left);
         System.out.print(node.toString());
-        inOrder(node.right);
+        inorder(node.right);
     }
 
     public void mapChildNodes(TreeNode node, int[][] leafs, int i, int j, int arraySize) {
