@@ -57,7 +57,7 @@ Step 3 − Recursively traverse right subtree.
     }
 
 /*
-//Tree: Preorder Traversal
+//Tree: postOrder Traversal
 Step 1 − Recursively traverse left subtree.
 Step 2 − Recursively traverse right subtree.
 Step 3 − Visit root node
