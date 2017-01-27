@@ -4,21 +4,17 @@ package com.datastructure.tree.hacker;
  * Created by proshad on 1/26/17.
  */
 public class TreeNode {
-    private int data;
-    private TreeNode left;
-    private TreeNode right;
+    public int data;
+    public TreeNode left;
+    public TreeNode right;
 
     TreeNode(int data) {
         this.data = data;
+        this.left = null;
+        this.right = null;
     }
 
-    TreeNode(int data, TreeNode left, TreeNode right) {
-        this.data = data;
-        this.left = left;
-        this.right = right;
-    }
-
-    private void insertLeft(int data) {
+    public void insertLeft(int data) {
         if (this.left == null) {
             this.left = new TreeNode(data);
         } else {
@@ -26,7 +22,7 @@ public class TreeNode {
         }
     }
 
-    private void insertRight(int data) {
+    public void insertRight(int data) {
         if (this.right == null) {
             this.right = new TreeNode(data);
         } else {
@@ -40,20 +36,6 @@ public class TreeNode {
         inorder(node.left);
         System.out.print(node.toString());
         inorder(node.right);
-    }
-
-    public void mapChildNodes(TreeNode node, int[][] leafs, int i, int j, int arraySize) {
-        if (arraySize == 0)
-            return;
-
-        if (leafs[i][j] > -1) {
-            node.insertLeft(leafs[i][j]);
-            mapChildNodes(node.left, leafs, leafs[i][j] - 1, 0, arraySize - 1);
-        }
-        if (leafs[i][j + 1] > -1) {
-            node.insertRight(leafs[i][j + 1]);
-            mapChildNodes(node.right, leafs, leafs[i][j + 1] - 1, 0, arraySize - 1);
-        }
     }
 
     public void swap(TreeNode node, int targetDepth, int depth) {
