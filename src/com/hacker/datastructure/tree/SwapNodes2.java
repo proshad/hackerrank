@@ -36,7 +36,5 @@ public class SwapNodes2 {
             root.inorder(root);
             System.out.println();
         }
-
-
     }
 }
