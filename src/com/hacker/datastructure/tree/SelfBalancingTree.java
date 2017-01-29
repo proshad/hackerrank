@@ -16,7 +16,7 @@ public class SelfBalancingTree {
     // A utility function to get height of the tree
     static int getHeight(Node N) {
         if (N == null)
-            return 0;
+            return -1;
         return N.ht;
     }
 

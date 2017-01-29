@@ -24,7 +24,7 @@ class AVLTree {
     // A utility function to get height of the tree
     int height(AVLNode N) {
         if (N == null)
-            return 0;
+            return -1;
 
         return N.height;
     }
