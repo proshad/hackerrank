@@ -1,7 +1,6 @@
 package com.hacker.datastructure.stack;
 
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,32 +19,43 @@ public class EqualStacks {
         int sum1[] = new int[n1];
         int sum2[] = new int[n2];
         int sum3[] = new int[n3];
-        for (int h1_i = 0; h1_i < n1; h1_i++) {
-            h1[h1_i] = in.nextInt();
-            if(h1_i>0){
-                sum1[h1_i] = sum1[h1_i-1]+h1[h1_i];
-            }else {
-                sum1[h1_i] = h1[h1_i];
-            }
+        for (int i = 0; i < n1; i++) {
+            h1[i] = in.nextInt();
         }
         int h2[] = new int[n2];
-        for (int h2_i = 0; h2_i < n2; h2_i++) {
-            h2[h2_i] = in.nextInt();
-            if(h2_i>0){
-                sum2[h2_i] = sum2[h2_i-1]+h2[h2_i];
-            }else {
-                sum2[h2_i] = h2[h2_i];
-            }
+        for (int i = 0; i < n2; i++) {
+            h2[i] = in.nextInt();
         }
         int h3[] = new int[n3];
-        for (int h3_i = 0; h3_i < n3; h3_i++) {
-            h3[h3_i] = in.nextInt();
-            if(h3_i>0){
-                sum3[h3_i] = sum3[h3_i-1]+h3[h3_i];
-            }else {
-                sum3[h3_i] = h3[h3_i];
-            }
+        for (int i = 0; i < n3; i++) {
+            h3[i] = in.nextInt();
         }
+        int a = 0, b = 0, c = 0;
+        for (int i=n1-1;i>-1;i--) {
+            if (a == 0) {
+                sum1[a] = h1[i];
+            } else {
+                sum1[a] = (h1[i] + sum1[a - 1]);
+            }
+            a++;
+        }
+        for (int i=n2-1;i>-1;i--) {
+            if (b == 0) {
+                sum2[b] = h2[i];
+            } else {
+                sum2[b] = h2[i] + sum2[b - 1];
+            }
+            b++;
+        }
+        for (int i=n3-1;i>-1;i--) {
+            if (c == 0) {
+                sum3[c] = h3[i];
+            } else {
+                sum3[c] = h3[i] + sum3[c - 1];
+            }
+            c++;
+        }
+
         int i = 0, j = 0, k = 0;
         Stack<Integer> st = new Stack<Integer>();
         // Iterate through three arrays while all arrays have elements
@@ -62,8 +72,7 @@ public class EqualStacks {
             else
                 k++;
         }
-        System.out.println(st.size()+" : "+st.peek());
-        System.out.println(sum1[n1-1]+" : "+sum2[n2-1]+" : "+sum3[n3-1]);
+        System.out.println(st.peek());
 
         in.close();
     }
