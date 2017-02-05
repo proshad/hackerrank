@@ -18,39 +18,18 @@ public class QueriesFixedLength {
 
         for (int t = 0; t < q; t++) {
             int d = sc.nextInt();
-            LinkedList<Integer> queue = new LinkedList<Integer>();
-            LinkedList<Integer> maxQueue = new LinkedList<Integer>();
-            int len =  Math.min(d+t,n);
-            int initial = t%n;
-            int max = arr[initial];
-            for (int i = initial; i < len; i++) {
-                int item = arr[i];
-                queue.add(item);
-                if (maxQueue.size() < 1) {
-                    maxQueue.add(item);
-                } else {
-                    int tail = maxQueue.peekLast();
-                    if (tail < item) {
-                        maxQueue.add(item);
-                    } else {
-                        // delete until tail is greater than element or queue becomes empty
-                        while (tail > item && maxQueue.size() > 0) {
-                            maxQueue.poll();
-                        }
-                        maxQueue.add(item);
-                    }
+            int min = Integer.MAX_VALUE;
+            for (int i = 0; i <= n-d; i++) {
+                int max = arr[i];
+                for(int j = 1;j<d;j++){
+                    if (arr[i+j] > max)
+                        max = arr[i+j];
                 }
-
-
-                if (maxQueue.size() > d) {
-                    int deletedItem = queue.poll();
-                    if (deletedItem == maxQueue.peek()) {
-                        maxQueue.poll();
-                    }
+                if(min>max){
+                    min = max;
                 }
-
             }
-            System.out.println(maxQueue.peek());
+            System.out.println(min);
         }
     }
 
