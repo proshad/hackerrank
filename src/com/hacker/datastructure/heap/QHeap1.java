@@ -1,5 +1,6 @@
 package com.hacker.datastructure.heap;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -68,6 +69,7 @@ public class QHeap1 {
         public MinHeap(int size) {
             this.size = size;
             mH = new int[size + 1];
+            Arrays.fill(mH, Integer.MIN_VALUE);
             position = 0;
         }
 
@@ -99,7 +101,7 @@ public class QHeap1 {
             for (int i = 1; i < mH.length; i++) {
                 if (mH[i] == val) {
                     mH[i] = mH[position - 1];
-                    mH[position - 1] = 0;
+                    mH[position - 1] = Integer.MIN_VALUE;
                     position--;
                     sinkDown(i);
                     return;
