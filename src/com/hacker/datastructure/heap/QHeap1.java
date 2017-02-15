@@ -5,6 +5,40 @@ import java.util.Scanner;
 /**
  * Created by proshad on 2/15/17.
  * http://algorithms.tutorialhorizon.com/binary-min-max-heap/
+ *
+ * 22
+ 1 286789035
+ 1 255653921
+ 1 274310529
+ 1 494521015
+ 3
+ 2 255653921
+ 2 286789035
+ 3
+ 1 236295092
+ 1 254828111
+ 2 254828111
+ 1 465995753
+ 1 85886315
+ 1 7959587
+ 1 20842598
+ 2 7959587
+ 3
+ 1 -51159108
+ 3
+ 2 -51159108
+ 3
+ 1 789534713
+
+ out put
+
+ 255653921
+ 274310529
+ 20842598
+ -51159108
+ 20842598
+
+ *
  */
 public class QHeap1 {
     public static void main(String[] args) {
@@ -99,3 +133,7 @@ public class QHeap1 {
     }
 
 }
+
+
+
+
