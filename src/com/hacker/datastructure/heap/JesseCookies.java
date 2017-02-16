@@ -4,27 +4,31 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * Created by proshad on 2/15/17.
- * http://algorithms.tutorialhorizon.com/binary-min-max-heap/
+ * Created by proshad on 2/16/17.
  */
-public class QHeap1 {
-    public static void main(String[] args) {
+public class JesseCookies {
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
+        int k = sc.nextInt();
         MinHeap m = new MinHeap(n);
         for (int i = 0; i < n; i++) {
-            int q = sc.nextInt();
-            if (q == 1) {   // add element
-                int x = sc.nextInt();
-                m.insert(x);
-
-            } else if (q == 2) {  // delete element
-                m.delete(sc.nextInt());
-            } else {   // print element
-                System.out.println(m.extractMin());
-
+            m.insert(sc.nextInt());
+        }
+        int step = 0;
+        int root = m.extractMin();
+        while (root<k){
+            step++;
+            int nextItem = m.extractMin();
+            m.insert(root + 2*nextItem);
+            root = m.extractMin();
+            if(m.getPosition()==1 && root<k){
+                step=-1;
+                break;
             }
         }
+        System.out.println(step);
+
     }
 
     public static class MinHeap {
@@ -35,7 +39,6 @@ public class QHeap1 {
         public MinHeap(int size) {
             this.size = size;
             mH = new int[size + 1];
-            Arrays.fill(mH, Integer.MIN_VALUE);
             position = 0;
         }
 
@@ -49,6 +52,10 @@ public class QHeap1 {
             }
         }
 
+        public int getPosition(){
+            return position;
+        }
+
         public void bubbleUp() {
             int pos = position - 1;
             while (pos > 0 && mH[pos / 2] > mH[pos]) {
@@ -60,20 +67,12 @@ public class QHeap1 {
         }
 
         public int extractMin() {
-            return mH[1];
-        }
-
-        public void delete(int val) {
-            for (int i = 1; i < mH.length; i++) {
-                if (mH[i] == val) {
-                    mH[i] = mH[position - 1];
-                    mH[position - 1] = Integer.MIN_VALUE;
-                    position--;
-                    sinkDown(i);
-                    return;
-                }
-
-            }
+            int min = mH[1];
+            mH[1]=mH[position-1];
+            mH[position-1]=0;
+            position--;
+            sinkDown(1);
+            return min;
         }
 
         public void sinkDown(int k) {
@@ -99,9 +98,4 @@ public class QHeap1 {
         }
 
     }
-
 }
-
-
-
-
